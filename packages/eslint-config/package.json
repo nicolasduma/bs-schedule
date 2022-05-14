@@ -1,0 +1,9 @@
+{
+  "name": "@bs-schedule/eslint-config",
+  "version": "0.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/nicolasduma/bs-schelue",
+  "author": "Nicolas Duma <nicolasduma@outlook.com>",
+  "license": "MIT",
+  "private": true
+}
