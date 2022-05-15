@@ -15,6 +15,7 @@
     "prepare": "husky install"
   },
   "devDependencies": {
+    "@bs-schedule/eslint-config": "*",
     "@commitlint/cli": "^16.3.0",
     "commitizen": "^4.2.4",
     "commitlint-config-gitmoji": "^2.2.5",
