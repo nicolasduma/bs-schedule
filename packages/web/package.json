@@ -2,7 +2,7 @@
   "name": "@bs-schedule/web",
   "version": "0.0.0",
   "main": "index.js",
-  "repository": "https://github.com/nicolasduma/bs-schelue",
+  "repository": "https://github.com/nicolasduma/bs-schedule",
   "author": "Nicolas Duma <nicolasduma@outlook.com>",
   "license": "MIT",
   "private": true,
