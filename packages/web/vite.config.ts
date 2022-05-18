@@ -6,5 +6,12 @@ export default defineConfig({
   server: {
     port: 7000,
   },
-  plugins: [tsconfigPaths(), react()],
+  plugins: [
+    tsconfigPaths(),
+    react({
+      babel: {
+        plugins: ['babel-plugin-macros', 'babel-plugin-styled-components'],
+      },
+    }),
+  ],
 })
