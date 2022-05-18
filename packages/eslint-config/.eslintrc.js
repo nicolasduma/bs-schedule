@@ -37,5 +37,6 @@ module.exports = {
         alphabetize: { order: 'asc', ignoreCase: true },
       },
     ],
+   '@typescript-eslint/no-explicit-any': ["off"],
   },
 }
