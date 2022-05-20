@@ -1,7 +1,9 @@
 import React from 'react'
 
+import { PageComponent } from '#/components'
 const PreloadPage = () => {
-  return <h1>PreloadPage</h1>
+    <PageComponent.Body>
+    </PageComponent.Body>
 }
 
 export default PreloadPage
