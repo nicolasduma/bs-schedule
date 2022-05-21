@@ -29,6 +29,7 @@
     "babel-plugin-macros": "^3.1.0",
     "babel-plugin-styled-components": "^2.0.7",
     "postcss": "^8.4.13",
+    "react-devtools": "^4.24.6",
     "tailwindcss": "^3.0.24",
     "twin.macro": "^2.8.2",
     "typescript": "^4.6.3",
