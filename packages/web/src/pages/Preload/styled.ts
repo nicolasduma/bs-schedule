@@ -1,5 +1,5 @@
 import tw from 'twin.macro'
 
 export const Container = tw.div`
-  p-[15%]
+  px-[15%]
 `
