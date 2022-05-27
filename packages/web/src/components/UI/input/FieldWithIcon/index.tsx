@@ -24,6 +24,9 @@ const FieldWithIcon = ({
       onClick={() => {
         elementRef.current && elementRef.current.focus()
       }}
+      css={
+        isFocused ? tw`border-amber-400 [div:nth-child(1)]:text-amber-400` : ''
+      }
     >
       <Styled.IconInInputContainer>{elementIcon}</Styled.IconInInputContainer>
 

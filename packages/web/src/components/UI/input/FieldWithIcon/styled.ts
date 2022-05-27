@@ -1,12 +1,12 @@
 import tw from 'twin.macro'
 
 export const FieldContainer = tw.div`
-  w-[90%]
+  w-full
   h-14
   flex justify-center items-center
   border-solid border-2 border-zinc-600
   rounded-md
-  text-zinc-500
+  [div:nth-child(1)]:text-zinc-500
 `
 
 export const IconInInputContainer = tw.div`
@@ -19,6 +19,6 @@ export const Input = tw.input`
   pr-4
   bg-transparent
   outline-none
-  text-white
   placeholder:text-zinc-400
+  [::-ms-reveal]:hidden
 `
