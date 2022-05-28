@@ -20,9 +20,9 @@ const FieldWithIcon = ({
 
   return (
     <Styled.FieldContainer
-      css={isFocused ? tw`border-amber-400 text-amber-400` : ''}
-      onClick={() => {
-        elementRef.current && elementRef.current.focus()
+      onClick={({ target }) => {
+        if ((target as HTMLInputElement).dataset.use_to_focus !== 'off')
+          elementRef.current && elementRef.current.focus()
       }}
       css={
         isFocused ? tw`border-amber-400 [div:nth-child(1)]:text-amber-400` : ''
