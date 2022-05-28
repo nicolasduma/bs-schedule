@@ -13,6 +13,7 @@ const AccessPage = () => (
     <PageComponent.Body>
       <Styled.Container>
       <Form />
+        <Styled.OrLine>OU</Styled.OrLine>
       </Styled.Container>
     </PageComponent.Body>
   </>
