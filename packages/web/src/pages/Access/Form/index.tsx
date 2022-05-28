@@ -19,12 +19,18 @@ const Form = () => {
   }, [passwordInputRef, isVisiblePassword])
 
   return (
-    <Styled.Form>
+    <Styled.Form
+      onSubmit={(event) => {
+        event.preventDefault()
+      }}
+    >
       <UIComponent.Input.FieldWithIcon
         elementRef={emailInputRef}
         elementIcon={<At />}
         placeholder="Email"
         type="email"
+        spellCheck="false"
+        autoComplete="disabled"
       />
 
       <UIComponent.Input.FieldWithIcon
@@ -51,6 +57,10 @@ const Form = () => {
           {isVisiblePassword ? <EyeSlash /> : <Eye />}
         </Styled.RevealPasswordButton>
       </UIComponent.Input.FieldWithIcon>
+
+      <UIComponent.Button.Filled type="submit" disabled={false}>
+        Acessar
+      </UIComponent.Button.Filled>
     </Styled.Form>
   )
 }
