@@ -1,4 +1,8 @@
-import React from 'react'
+import React, { ButtonHTMLAttributes } from 'react'
+import { GoogleLogin } from 'react-google-login'
+import { BsGoogle } from 'react-icons/bs'
+
+import { CLIENT_ID_TO_GOOGLE_LOGIN } from '#/constants'
 
 import { LayoutComponent, PageComponent } from '#/components'
 
@@ -16,9 +20,23 @@ const AccessPage = () => (
           <LayoutComponent.Logo />
         </Styled.LogoContainer>
 
-      <Form />
+        <Form />
 
         <Styled.OrLine>OU</Styled.OrLine>
+
+        <GoogleLogin
+          clientId={CLIENT_ID_TO_GOOGLE_LOGIN}
+          render={(props: ButtonHTMLAttributes<HTMLButtonElement>) => (
+            <Styled.AccessWithGoogleButton
+              type="button"
+              onClick={props.onClick}
+              disabled={props.disabled}
+            >
+              <BsGoogle />
+              <span>Acessar com o Google</span>
+            </Styled.AccessWithGoogleButton>
+          )}
+        />
       </Styled.Container>
     </PageComponent.Body>
   </>

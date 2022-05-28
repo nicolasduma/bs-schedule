@@ -19,3 +19,15 @@ export const OrLine = tw.div`
 
   [:before, :after]:(content-[''] w-full h-0.5 bg-darkslategray-700)
 `
+
+export const AccessWithGoogleButton = tw(UIComponent.Button.Filled)`
+  px-[5%]
+  flex justify-center items-center
+  bg-darkslategray-800
+  text-zinc-100
+  cursor-pointer
+  [:hover]:bg-darkslategray-700
+
+  [> :nth-child(1)]:(text-xl)
+  [> span]:flex-grow
+`
