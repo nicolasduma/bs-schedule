@@ -7,13 +7,13 @@ import * as Styled from './styled'
 interface PropsInterface extends InputHTMLAttributes<HTMLInputElement> {
   elementRef: React.RefObject<HTMLInputElement>
   elementIcon: ReactElement
-  elementInFinal?: ReactElement
+  children?: ReactElement
 }
 
 const FieldWithIcon = ({
   elementRef,
   elementIcon,
-  elementInFinal,
+  children,
   ...props
 }: PropsInterface) => {
   const [isFocused, setIsFocused] = useState(false)
@@ -37,7 +37,7 @@ const FieldWithIcon = ({
         onBlur={() => setIsFocused(false)}
       />
 
-      {elementInFinal}
+      {children}
     </Styled.FieldContainer>
   )
 }
