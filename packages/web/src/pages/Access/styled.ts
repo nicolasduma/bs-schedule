@@ -1,9 +1,15 @@
 import tw from 'twin.macro'
 
+import { UIComponent } from '#/components'
+
 export const Container = tw.div`
   w-full max-w-xl
-  flex flex-col gap-6
+  flex flex-col items-center gap-6
   px-4
+`
+
+export const LogoContainer = tw.div`
+  w-60
 `
 
 export const OrLine = tw.div`
