@@ -4,6 +4,7 @@ module.exports = {
     extend: {
       colors: {
         amber: {
+          300: '#fcd34d',
           400: '#fbbf24',
         },
         darkslategray: {
