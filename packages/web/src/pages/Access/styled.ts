@@ -16,6 +16,8 @@ export const OrLine = tw.div`
   w-full
   flex items-center gap-[8%]
   p-[2%]
+  text-[.8rem]
+  tracking-widest
 
   [:before, :after]:(content-[''] w-full h-0.5 bg-darkslategray-700)
 `
