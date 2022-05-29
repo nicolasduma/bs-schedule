@@ -2,7 +2,7 @@ import React from 'react'
 import { HelmetProvider } from 'react-helmet-async'
 import { BrowserRouter } from 'react-router-dom'
 
-import Routes from './Routes'
+import AnimatedRoutes from './AnimatedRoutes'
 import * as Styled from './styled'
 
 const App = () => {
@@ -10,7 +10,7 @@ const App = () => {
     <Styled.App>
       <HelmetProvider>
         <BrowserRouter>
-          <Routes />
+          <AnimatedRoutes />
         </BrowserRouter>
       </HelmetProvider>
     </Styled.App>
