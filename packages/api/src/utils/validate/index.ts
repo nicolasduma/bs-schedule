@@ -4,7 +4,7 @@ import addFormats from 'ajv-formats'
 
 import makeResult from '../makeResult'
 
-const validate = (toValidate: Record<string, any>, schema: Schema) => {
+const validate = (toValidate: any, schema: Schema) => {
   const ajv = new Ajv({ allErrors: true })
   addFormats(ajv)
   addErrors(ajv)
@@ -13,9 +13,9 @@ const validate = (toValidate: Record<string, any>, schema: Schema) => {
 
   validate(toValidate)
 
-  const error = validate.errors ? validate.errors[0] : null
+  const error = validate.errors ? { message: validate.errors[0].message } : null
 
-  return makeResult({ msg: error?.message })
+  return makeResult(error)
 }
 
 export default validate
