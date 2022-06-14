@@ -13,6 +13,7 @@ describe('validate user to make it', () => {
   })
 
   it('should not be able to validate without email', () => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { email, ...testUserCopy } = testUser
     // @ts-ignore
     const { error } = validateUser(testUserCopy)
@@ -25,6 +26,7 @@ describe('validate user to make it', () => {
   })
 
   it('should not be able to validate without password', () => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { password, ...testUserCopy } = testUser
     // @ts-ignore
     const { error } = validateUser(testUserCopy)
