@@ -1,9 +1,14 @@
-import { validate } from '#/utils'
+import { makeResult, validate, validateString } from '#/utils'
 
 import { PasswordType } from '../Contract/types'
 import schema from './schema'
 
-const validatePassword = (password: PasswordType) =>
-  validate(password.replace(/\s/g, ''), schema)
+const validatePassword = (password: PasswordType) => {
+  const { error } = validateString(password)
+
+  if (error) return makeResult({ message: `password/${error.message}` })
+
+  return validate(password.replace(/\s/g, ''), schema)
+}
 
 export default validatePassword
