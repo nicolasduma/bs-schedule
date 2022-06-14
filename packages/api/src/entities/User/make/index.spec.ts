@@ -1,25 +1,25 @@
+import { validate as validateUUID } from 'uuid'
+
 import make from '.'
 
-const fakeUser = {
+import { Contract } from '..'
+
+const testUser: Contract = {
   email: 'contato@email.com',
   password: '123456',
 }
 
 describe('make user', () => {
   it('should be able make a user', () => {
-    const { error } = make(fakeUser)
-    expect(error).toBe(false)
+    const { success: user } = make(testUser)
+    expect(user.email).toBe(testUser.email)
+    expect(user.password).toBe(testUser.password)
+    expect(validateUUID(user.id)).toBe(true)
   })
 
   it('should not be able make user without email', () => {
-    const fakeUserCopy = { ...fakeUser, email: '' }
-    const { error } = make(fakeUserCopy)
-    expect(error.msg).toBe('invalid-email')
-  })
-
-  it('should not be able make user without password', () => {
-    const fakeUserCopy = { ...fakeUser, password: '' }
-    const { error } = make(fakeUserCopy)
-    expect(error.msg).toBe('invalid-password')
+    const { error } = make({ ...testUser, email: '' })
+    expect(error).not.toBeFalsy()
+    expect(error.layer).toBe('entity')
   })
 })
