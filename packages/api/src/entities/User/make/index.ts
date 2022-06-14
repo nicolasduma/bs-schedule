@@ -1,21 +1,17 @@
 import { v4 as uuid } from 'uuid'
-import validator from 'validator'
-
-import { ERRORS } from '#/constants'
 
 import { makeResult } from '#/utils'
 
-import Contract from '../Contract'
+import { Contract, validateUser } from '..'
 
 const make = (user: Contract) => {
-  user.id = uuid()
+  const { error } = validateUser(user)
 
-  if (!validator.isEmail(user.email)) return makeResult(ERRORS.invalidEmail)
+  if (error) return makeResult({ layer: 'entity', message: error.message })
 
-  if (!validator.isLength(user.password, { min: 6, max: 25 }))
-    return makeResult(ERRORS.invalidPassword)
+  const id = uuid()
 
-  return makeResult(null, { ...user })
+  return makeResult(null, { id, ...user })
 }
 
 export default make
