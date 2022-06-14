@@ -1,7 +1,9 @@
+import { EmailType, PasswordType } from './types'
+
 interface Contract {
   id?: string
-  email: string
-  password: string
+  readonly email: EmailType
+  readonly password: PasswordType
 }
 
 export default Contract
