@@ -2,11 +2,16 @@ import prisma from '#/libs/prisma'
 
 import { userEntity } from '#/entities'
 
-import Contract from '../Contract'
+import { Contract } from '../'
 
 const adapter: Contract = {
-  save: async (datas: userEntity.Contract) => {
-    await prisma.user.create({ data: datas })
+  save: async (user: userEntity.Contract) => {
+    const filtedDatas: userEntity.Contract = {
+      email: user.email,
+      password: user.password,
+      id: user.id,
+    }
+    await prisma.user.create({ data: filtedDatas })
   },
 }
 
