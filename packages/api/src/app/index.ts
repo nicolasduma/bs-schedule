@@ -1,12 +1,12 @@
 import express from 'express'
 
+import bodyParcer from 'body-parser'
+
 import router from './router'
 
 const app = express()
 
+app.use(bodyParcer.json())
 app.use(router)
-app.use('/', (req, res) => {
-  res.send('Hello World')
-})
 
 export default app
