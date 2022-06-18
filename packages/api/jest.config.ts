@@ -11,5 +11,13 @@ export default {
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
     prefix: '<rootDir>',
   }),
+  setupFiles: ['dotenv/config'],
+  coveragePathIgnorePatterns: [
+    '<rootDir>/node_modules/*',
+    '<rootDir>/dist/*',
+    '<rootDir>/prisma/*',
+    '<rootDir>/src/repositories/*',
+    '<rootDir>/src/providers/*',
+  ],
   preset: 'ts-jest',
 }
