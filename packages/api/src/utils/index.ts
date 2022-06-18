@@ -1,3 +1,4 @@
+export { default as decodeJWT } from './decodeJWT'
 export { default as generateJWT } from './generateJWT'
 export { default as generatePasswordHash } from './generatePasswordHash'
 export { default as makeResult } from './makeResult'
