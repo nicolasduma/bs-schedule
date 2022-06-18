@@ -1,3 +1,4 @@
+export { default as generateJWT } from './generateJWT'
 export { default as generatePasswordHash } from './generatePasswordHash'
 export { default as makeResult } from './makeResult'
 export { default as makeResultPromise } from './makeResultPromise'
