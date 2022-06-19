@@ -17,12 +17,16 @@ describe('validate user to make it', () => {
     const { email, ...testUserCopy } = testUser
     // @ts-ignore
     const { error } = validateUser(testUserCopy)
+
     expect(error.message).toBe('email/not-found')
+    expect(error.layer).toBe('entity')
   })
 
   it('should not be able to validate with invalid email', () => {
     const { error } = validateUser({ ...testUser, email: ' ' })
+
     expect(error.message).toBeTruthy()
+    expect(error.layer).toBe('entity')
   })
 
   it('should not be able to validate without password', () => {
@@ -30,11 +34,15 @@ describe('validate user to make it', () => {
     const { password, ...testUserCopy } = testUser
     // @ts-ignore
     const { error } = validateUser(testUserCopy)
+
     expect(error.message).toBe('password/not-found')
+    expect(error.layer).toBe('entity')
   })
 
   it('should not be able to validate with invalid password', () => {
     const { error } = validateUser({ ...testUser, password: ' ' })
+
     expect(error.message).toBeTruthy()
+    expect(error.layer).toBe('entity')
   })
 })
