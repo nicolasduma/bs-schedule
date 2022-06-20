@@ -37,7 +37,7 @@ const makeExecuteInteractor = (usersRepository: usersRepository.Contract) => {
       })
     }
 
-    return makeResult(null)
+    return makeResult(null, userFound)
   }
 
   return executeInteractor
