@@ -1,10 +1,10 @@
 import { Response, Request, NextFunction } from 'express'
 
-import { generateJWT } from '#/utils'
+import { generateJWT, makeResult } from '#/utils'
 
 import { usersRepository } from '#/repositories'
 
-import makeExecuteInteractor from '../makeExecuteInteractor'
+import { makeExecuteInteractor } from '../'
 
 const handleController = async (
   request: Request,
@@ -18,12 +18,12 @@ const handleController = async (
     response.status(400)
 
     if (error.layer) {
-      response.send(error)
+      response.send(makeResult(error))
     } else if (error.message === 'email/not-exists') {
-      response.send({ layer: 'database', message: error.message })
+      response.send(makeResult({ layer: 'database', message: error.message }))
     } else {
       response.status(500)
-      response.send({ message: 'server/there-was-error' })
+      response.send(makeResult({ message: 'server/there-was-error' }))
     }
 
     return
@@ -32,7 +32,7 @@ const handleController = async (
   const userToken = generateJWT(request.body)
 
   response.status(200)
-  response.send({ token: userToken })
+  response.send(makeResult(null, { token: userToken }))
 
   if (next) next()
 }
