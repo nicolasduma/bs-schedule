@@ -15,7 +15,7 @@ describe('make execute interactor of verify user', () => {
   it('should be able verify user', async () => {
     const { success } = await executeInteractor(testUser)
 
-    expect(success).toBe(true)
+    expect(typeof success).toBe('object')
     expect(usersRepository.inMemory.findByEmail).toHaveBeenCalled()
   })
 
