@@ -1,8 +1,10 @@
 import { Response, Request, NextFunction } from 'express'
 
+import { makeResult } from '#/utils'
+
 import { usersRepository } from '#/repositories'
 
-import makeExecuteInteractor from '../makeExecuteInteractor'
+import { makeExecuteInteractor } from '../'
 
 const handleController = async (
   request: Request,
@@ -16,19 +18,21 @@ const handleController = async (
     response.status(400)
 
     if (error.layer) {
-      response.send(error)
+      response.send(makeResult(error))
     } else if (error.code === 'P2002') {
-      response.send({ layer: 'database', message: 'email/alredy-exists' })
+      response.send(
+        makeResult({ layer: 'database', message: 'email/already-exists' })
+      )
     } else {
       response.status(500)
-      response.send({ message: 'server/there-was-error' })
+      response.send(makeResult({ message: 'server/there-was-error' }))
     }
 
     return
   }
 
   response.status(201)
-  response.send({ created: true })
+  response.send(makeResult(null))
 
   if (next) next()
 }
