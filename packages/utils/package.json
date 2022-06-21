@@ -5,5 +5,15 @@
   "repository": "https://github.com/nicolasduma/bs-schedule",
   "author": "Nicolas Duma <nicolasduma@outlook.com>",
   "license": "MIT",
-  "private": true
+  "private": true,
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@types/jest": "^28.1.2",
+    "@types/node": "^18.0.0",
+    "jest": "^28.1.1",
+    "ts-jest": "^28.0.5",
+    "typescript": "^4.7.4"
+  }
 }
