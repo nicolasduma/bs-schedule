@@ -1,2 +1,2 @@
 export { default as makeResult } from './makeResult'
-export { default as makePromiseResult } from './makeResultFromPromise'
+export { default as makeResultFromPromise } from './makeResultFromPromise'
