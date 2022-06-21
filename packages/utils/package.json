@@ -1,0 +1,9 @@
+{
+  "name": "utils",
+  "version": "0.0.0",
+  "main": "./src/main.ts",
+  "repository": "https://github.com/nicolasduma/bs-schedule",
+  "author": "Nicolas Duma <nicolasduma@outlook.com>",
+  "license": "MIT",
+  "private": true
+}
