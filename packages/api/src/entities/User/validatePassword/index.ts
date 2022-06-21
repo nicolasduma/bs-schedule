@@ -1,4 +1,6 @@
-import { makeResult, validate, validateString } from '#/utils'
+import { makeResult } from '@bs-schedule/utils'
+
+import { validate, validateString } from '#/utils'
 
 import { PasswordType } from '../Contract/types'
 import schema from './schema'

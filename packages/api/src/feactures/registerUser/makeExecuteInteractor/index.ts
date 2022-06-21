@@ -1,4 +1,6 @@
-import { generatePasswordHash, makeResult, makeResultPromise } from '#/utils'
+import { makeResult, makeResultFromPromise } from '@bs-schedule/utils'
+
+import { generatePasswordHash } from '#/utils'
 
 import { userEntity } from '#/entities'
 
@@ -16,7 +18,7 @@ const makeExecuteInteractor = (usersRepository: usersRepository.Contract) => {
 
     user.password = generatePasswordHash(user.password)
 
-    return await makeResultPromise(() => usersRepository.save(user))
+    return await makeResultFromPromise(() => usersRepository.save(user))
   }
 
   return executeInteractor

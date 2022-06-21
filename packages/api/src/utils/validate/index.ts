@@ -1,8 +1,7 @@
+import { makeResult } from '@bs-schedule/utils'
 import Ajv, { Schema } from 'ajv'
 import addErrors from 'ajv-errors'
 import addFormats from 'ajv-formats'
-
-import makeResult from '../makeResult'
 
 const validate = (toValidate: any, schema: Schema) => {
   const ajv = new Ajv({ allErrors: true })

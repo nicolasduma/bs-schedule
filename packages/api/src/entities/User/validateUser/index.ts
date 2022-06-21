@@ -1,4 +1,4 @@
-import { makeResult } from '#/utils'
+import { makeResult } from '@bs-schedule/utils'
 
 import { Contract, validateEmail, validatePassword } from '..'
 

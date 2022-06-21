@@ -1,6 +1,8 @@
 import { Response, Request, NextFunction } from 'express'
 
-import { generateJWT, makeResult } from '#/utils'
+import { makeResult } from '@bs-schedule/utils'
+
+import { generateJWT } from '#/utils'
 
 import { usersRepository } from '#/repositories'
 

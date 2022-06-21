@@ -1,12 +1,10 @@
+import { makeResult, makeResultFromPromise } from '@bs-schedule/utils'
 import jwt from 'jsonwebtoken'
 
 import { JWT_SECRET } from '#/constants'
 
-import { makeResultPromise } from '../'
-import makeResult from '../makeResult'
-
 const decodeJWT = async (token: string) => {
-  const { error, success: decoded } = await makeResultPromise(() =>
+  const { error, success: decoded } = await makeResultFromPromise(() =>
     jwt.verify(token, JWT_SECRET)
   )
 

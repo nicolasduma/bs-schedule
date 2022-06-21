@@ -1,4 +1,6 @@
-import { makeResult, makeResultPromise, verifyPassword } from '#/utils'
+import { makeResult, makeResultFromPromise } from '@bs-schedule/utils'
+
+import { verifyPassword } from '#/utils'
 
 import { userEntity } from '#/entities'
 
@@ -15,7 +17,9 @@ const makeExecuteInteractor = (usersRepository: usersRepository.Contract) => {
     }
 
     const { error: errorFindingUser, success: userFound } =
-      await makeResultPromise(() => usersRepository.findByEmail(datas.email))
+      await makeResultFromPromise(() =>
+        usersRepository.findByEmail(datas.email)
+      )
 
     if (errorFindingUser) {
       return makeResult(errorFindingUser)

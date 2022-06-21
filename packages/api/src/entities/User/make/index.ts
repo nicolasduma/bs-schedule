@@ -1,6 +1,5 @@
 import { v4 as uuid } from 'uuid'
-
-import { makeResult } from '#/utils'
+import { makeResult } from '@bs-schedule/utils'
 
 import { Contract, validateUser } from '..'
 
