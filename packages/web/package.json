@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@bs-schedule/utils": "*",
+    "@react-oauth/google": "^0.2.6",
     "@reduxjs/toolkit": "^1.8.2",
     "axios": "^0.27.2",
     "framer-motion": "^6.3.4",
