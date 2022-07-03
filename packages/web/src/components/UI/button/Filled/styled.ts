@@ -1,6 +1,8 @@
 import tw from 'twin.macro'
 
-export const Filled = tw.button`
+import { Core } from '../'
+
+export const Filled = tw(Core)`
   w-full
   h-14
   bg-amber-400
