@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { FormHTMLAttributes, useEffect, useRef, useState } from 'react'
+import { useDispatch } from 'react-redux'
 
 import { At, Eye, EyeSlash, LockKey } from 'phosphor-react'
 
@@ -6,7 +7,12 @@ import { UIComponent } from '#/components'
 
 import * as Styled from './styled'
 
-const Form = () => {
+interface PropsInterface extends FormHTMLAttributes<HTMLFormElement> {
+  isDisabled: boolean
+  setIsDisabled: (isDisabled: boolean) => void
+}
+
+const Form = ({ isDisabled, setIsDisabled, ...props }: PropsInterface) => {
   const emailInputRef = useRef<HTMLInputElement>(null)
   const passwordInputRef = useRef<HTMLInputElement>(null)
 
@@ -20,7 +26,8 @@ const Form = () => {
 
   return (
     <Styled.Form
-      onSubmit={(event) => {
+      {...props}
+      onSubmit={async (event) => {
         event.preventDefault()
       }}
     >
@@ -31,6 +38,7 @@ const Form = () => {
         type="email"
         spellCheck="false"
         autoComplete="disabled"
+        disabled={isDisabled}
       />
 
       <UIComponent.Input.FieldWithIcon
@@ -39,12 +47,13 @@ const Form = () => {
         placeholder="Senha"
         spellCheck="false"
         autoComplete="disabled"
+        disabled={isDisabled}
       >
         <Styled.RevealPasswordButton
           type="button"
+          disabled={isDisabled}
           data-use_to_focus="off"
-          onClick={({ target }) => {
-            ;(target as HTMLButtonElement).blur()
+          onClick={() => {
             setIsVisiblePassword(!isVisiblePassword)
           }}
           onKeyDown={(event) => {
@@ -58,7 +67,7 @@ const Form = () => {
         </Styled.RevealPasswordButton>
       </UIComponent.Input.FieldWithIcon>
 
-      <UIComponent.Button.Filled type="submit" disabled={false}>
+      <UIComponent.Button.Filled type="submit" disabled={isDisabled}>
         Acessar
       </UIComponent.Button.Filled>
     </Styled.Form>
