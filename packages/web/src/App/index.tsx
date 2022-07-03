@@ -5,6 +5,8 @@ import { BrowserRouter } from 'react-router-dom'
 
 import store from '#/store'
 
+import { UIComponent } from '#/components'
+
 import AnimatedRoutes from './AnimatedRoutes'
 import * as Styled from './styled'
 
@@ -17,6 +19,8 @@ const App = () => {
             <AnimatedRoutes />
           </BrowserRouter>
         </HelmetProvider>
+
+        <UIComponent.Modal.Presence />
       </ReduxProvider>
     </Styled.App>
   )
