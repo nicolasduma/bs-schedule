@@ -7,6 +7,7 @@ import { CLIENT_ID_TO_GOOGLE_LOGIN } from '#/constants'
 import { LayoutComponent, PageComponent } from '#/components'
 
 import Form from './Form'
+import GoogleButton from './GoogleButton'
 import * as Styled from './styled'
 
 const AccessPage = () => (
@@ -24,19 +25,7 @@ const AccessPage = () => (
 
         <Styled.OrLine>OU</Styled.OrLine>
 
-        <GoogleLogin
-          clientId={CLIENT_ID_TO_GOOGLE_LOGIN}
-          render={(props: ButtonHTMLAttributes<HTMLButtonElement>) => (
-            <Styled.AccessWithGoogleButton
-              type="button"
-              onClick={props.onClick}
-              disabled={props.disabled}
-            >
-              <BsGoogle />
-              <span>Acessar com o Google</span>
-            </Styled.AccessWithGoogleButton>
-          )}
-        />
+          <GoogleButton disabled={isDisabled} />
       </Styled.Container>
     </PageComponent.Body>
   </>
