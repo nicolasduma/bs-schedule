@@ -2,12 +2,13 @@ import { makeResult, makeResultFromPromise } from '@bs-schedule/utils'
 
 import sendUserToRegisterOrVerify from './sendUserToRegisterOrVerify'
 
-interface DatasInterface {
+interface UserInterface {
+  authMethod: 'google' | 'password'
   email: string
-  password: string
+  passwordOrGoogleId: string | null
 }
 
-const sendUserToAccessService = async (user: DatasInterface) => {
+const sendUserToAccessService = async (user: UserInterface) => {
   const { error, success: token } = await sendUserToRegisterOrVerify(
     'verify',
     user

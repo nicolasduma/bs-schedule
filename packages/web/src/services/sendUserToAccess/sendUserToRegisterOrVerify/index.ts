@@ -3,8 +3,9 @@ import { makeResult, makeResultFromPromise } from '@bs-schedule/utils'
 import api from '#/libs/api'
 
 interface UserInterface {
+  authMethod: 'google' | 'password'
   email: string
-  password: string
+  passwordOrGoogleId: string | null
 }
 
 const sendUserToRegisterOrVerify = async (
@@ -17,7 +18,7 @@ const sendUserToRegisterOrVerify = async (
 
   if (rejected) {
     if (rejected.message === 'Network Error')
-      makeResult({ message: 'network-error' })
+      return makeResult({ message: 'network-error' })
 
     const { error } = rejected.response.data
 
