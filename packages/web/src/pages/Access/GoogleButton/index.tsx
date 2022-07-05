@@ -1,11 +1,15 @@
 import React, { ButtonHTMLAttributes } from 'react'
 import { BsGoogle } from 'react-icons/bs'
 import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
-import { makeResultFromPromise } from '@bs-schedule/utils'
+import { makeResult, makeResultFromPromise } from '@bs-schedule/utils'
+import { sendUserToAccessService } from '#/services'
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 
 import firebase from '#/libs/firebase'
+
+import { LOCAL_STORAGE } from '#/constants'
 
 import { changeModalVisibility } from '#/store/actions'
 
@@ -17,9 +21,10 @@ type PropsType = ButtonHTMLAttributes<HTMLButtonElement>
 
 const GoogleButton = ({ onClick, ...props }: PropsType) => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
-  const accessWithGoogle = async () => {
-    const { error, success } = await makeResultFromPromise(
+  const accessGoogleAccount = async () => {
+    const { error, success: credentials } = await makeResultFromPromise(
       async () => await signInWithPopup(firebase.auth, googleProvider)
     )
 
@@ -31,20 +36,31 @@ const GoogleButton = ({ onClick, ...props }: PropsType) => {
 
       isNecessaryToShowModal &&
         dispatch(changeModalVisibility(true, 'oauth/error'))
-
-      return null
     }
 
-    console.log(success)
+    return makeResult(error, credentials)
   }
 
   return (
     <Styled.GoogleButton
       {...props}
-      onClick={(event) => {
+      onClick={async (event) => {
         ;(event.target as HTMLButtonElement).blur()
-        accessWithGoogle()
         onClick && onClick(event)
+        const { success: credentials } = await accessGoogleAccount()
+
+        if (!credentials) return
+
+        const { error, success: token } = await sendUserToAccessService({
+          authMethod: 'google',
+          email: credentials.user.email,
+          passwordOrGoogleId: credentials.user.uid,
+        })
+
+        if (error) return dispatch(changeModalVisibility(true, error.message))
+
+        localStorage.setItem(LOCAL_STORAGE.USER_TOKEN, token)
+        navigate('/')
       }}
     >
       <BsGoogle />
