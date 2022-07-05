@@ -10,13 +10,11 @@ interface PropsInterface extends InputHTMLAttributes<HTMLInputElement> {
   children?: ReactElement
 }
 
-const FieldWithIcon = ({
-  elementRef,
-  elementIcon,
-  children,
-  ...props
-}: PropsInterface) => {
+const FieldWithIcon = (props: PropsInterface) => {
   const [isFocused, setIsFocused] = useState(false)
+
+  const { elementRef, elementIcon, children, onBlur, onFocus, ...propsRest } =
+    props
 
   return (
     <Styled.FieldContainer
@@ -31,10 +29,16 @@ const FieldWithIcon = ({
       <Styled.IconInInputContainer>{elementIcon}</Styled.IconInInputContainer>
 
       <Styled.Input
-        {...props}
+        {...propsRest}
         ref={elementRef}
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
+        onBlur={(event) => {
+          setIsFocused(false)
+          onBlur && onBlur(event)
+        }}
+        onFocus={(event) => {
+          setIsFocused(true)
+          onFocus && onFocus(event)
+        }}
       />
 
       {children}
