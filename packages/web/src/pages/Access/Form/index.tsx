@@ -1,7 +1,13 @@
 import React, { FormHTMLAttributes, useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
+import { sendUserToAccessService } from '#/services'
 import { At, Eye, EyeSlash, LockKey } from 'phosphor-react'
+
+import { LOCAL_STORAGE } from '#/constants'
+
+import { changeModalVisibility } from '#/store/actions'
 
 import { UIComponent } from '#/components'
 
@@ -12,23 +18,46 @@ interface PropsInterface extends FormHTMLAttributes<HTMLFormElement> {
   setIsDisabled: (isDisabled: boolean) => void
 }
 
-const Form = ({ isDisabled, setIsDisabled, ...props }: PropsInterface) => {
+const Form = (props: PropsInterface) => {
+  const { isDisabled, setIsDisabled, onSubmit, ...propsRest } = props
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
   const emailInputRef = useRef<HTMLInputElement>(null)
   const passwordInputRef = useRef<HTMLInputElement>(null)
 
   const [isVisiblePassword, setIsVisiblePassword] = useState<boolean>(false)
 
   useEffect(() => {
-    ;(passwordInputRef.current as HTMLInputElement).type = isVisiblePassword
-      ? 'text'
-      : 'password'
+    if (passwordInputRef.current)
+      passwordInputRef.current.type = isVisiblePassword ? 'text' : 'password'
   }, [passwordInputRef, isVisiblePassword])
 
   return (
     <Styled.Form
-      {...props}
+      {...propsRest}
       onSubmit={async (event) => {
         event.preventDefault()
+        onSubmit && onSubmit(event)
+
+        setIsDisabled(true)
+
+        const { error, success: token } = await sendUserToAccessService({
+          authMethod: 'password',
+          email: (emailInputRef.current as HTMLInputElement).value,
+          passwordOrGoogleId: (passwordInputRef.current as HTMLInputElement)
+            .value,
+        })
+
+        if (error) {
+          dispatch(changeModalVisibility(true, error.message))
+          setIsDisabled(false)
+        } else {
+          localStorage.setItem(LOCAL_STORAGE.USER_TOKEN, token)
+          setIsDisabled(false)
+          navigate('/')
+        }
       }}
     >
       <UIComponent.Input.FieldWithIcon
@@ -48,28 +77,31 @@ const Form = ({ isDisabled, setIsDisabled, ...props }: PropsInterface) => {
         spellCheck="false"
         autoComplete="disabled"
         disabled={isDisabled}
-      >
-        <Styled.RevealPasswordButton
-          type="button"
-          disabled={isDisabled}
-          data-use_to_focus="off"
-          onClick={() => {
-            setIsVisiblePassword(!isVisiblePassword)
-          }}
-          onKeyDown={(event) => {
-            if (event.key === 'Enter') {
-              event.preventDefault()
+        children={
+          <Styled.RevealPasswordButton
+            type="button"
+            data-use_to_focus="off"
+            disabled={isDisabled}
+            onClick={() => {
               setIsVisiblePassword(!isVisiblePassword)
-            }
-          }}
-        >
-          {isVisiblePassword ? <EyeSlash /> : <Eye />}
-        </Styled.RevealPasswordButton>
-      </UIComponent.Input.FieldWithIcon>
+            }}
+            onKeyDown={(event) => {
+              if (event.key === 'Enter') {
+                event.preventDefault()
+                setIsVisiblePassword(!isVisiblePassword)
+              }
+            }}
+          >
+            {isVisiblePassword ? <EyeSlash /> : <Eye />}
+          </Styled.RevealPasswordButton>
+        }
+      />
 
-      <UIComponent.Button.Filled type="submit" disabled={isDisabled}>
-        Acessar
-      </UIComponent.Button.Filled>
+      <UIComponent.Button.Filled
+        type="submit"
+        disabled={isDisabled}
+        children="Acessar"
+      />
     </Styled.Form>
   )
 }
