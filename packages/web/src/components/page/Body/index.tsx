@@ -9,36 +9,36 @@ interface PropsInterface extends HTMLMotionProps<'div'> {
   animateToHidden?: boolean
 }
 
-const Body = ({
-  animateToShow = true,
-  animateToHidden = true,
-  ...props
-}: PropsInterface) => (
-  <Styled.Body
-    initial={animateToShow ? { opacity: 0 } : {}}
-    animate={
-      animateToShow
-        ? {
-            opacity: 1,
-            transition: {
-              duration: 1,
-              delay: 1,
-            },
-          }
-        : {}
-    }
-    exit={
-      animateToHidden
-        ? {
-            opacity: 0,
-            transition: {
-              duration: 1,
-            },
-          }
-        : {}
-    }
-    {...props}
-  />
-)
+const Body = (props: PropsInterface) => {
+  const { animateToShow = true, animateToHidden = true, ...propsRest } = props
+
+  return (
+    <Styled.Body
+      {...propsRest}
+      initial={animateToShow ? { opacity: 0 } : {}}
+      animate={
+        animateToShow
+          ? {
+              opacity: 1,
+              transition: {
+                duration: 1,
+                delay: 1,
+              },
+            }
+          : {}
+      }
+      exit={
+        animateToHidden
+          ? {
+              opacity: 0,
+              transition: {
+                duration: 1,
+              },
+            }
+          : {}
+      }
+    />
+  )
+}
 
 export default Body
