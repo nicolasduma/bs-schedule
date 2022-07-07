@@ -1,5 +1,6 @@
 export { default as Contract } from './Contract'
 export { default as make } from './make'
+export { default as validateAuthMethod } from './validateAuthMethod'
 export { default as validateEmail } from './validateEmail'
 export { default as validatePassword } from './validatePassword'
 export { default as validateUser } from './validateUser'
