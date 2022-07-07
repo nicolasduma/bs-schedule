@@ -1,11 +1,11 @@
 import { JSONSchemaType } from 'ajv'
 
-import { PasswordType } from '../Contract/types'
+import { PasswordType } from '../Contract'
 
 const schema: JSONSchemaType<PasswordType> = {
   type: 'string',
   minLength: 6,
-  maxLength: 25,
+  maxLength: 70,
 
   errorMessage: {
     type: 'password/not-string',

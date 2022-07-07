@@ -2,7 +2,7 @@ import { makeResult } from '@bs-schedule/utils'
 
 import { validate, validateString } from '#/utils'
 
-import { EmailType } from '../Contract/types'
+import { EmailType } from '../Contract'
 import schema from './schema'
 
 const validateEmail = (email: EmailType) => {

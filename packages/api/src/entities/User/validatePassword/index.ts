@@ -2,7 +2,7 @@ import { makeResult } from '@bs-schedule/utils'
 
 import { validate, validateString } from '#/utils'
 
-import { PasswordType } from '../Contract/types'
+import { PasswordType } from '../Contract'
 import schema from './schema'
 
 const validatePassword = (password: PasswordType) => {
