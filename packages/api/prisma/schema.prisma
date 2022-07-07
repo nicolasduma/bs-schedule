@@ -8,9 +8,10 @@ generator client {
 }
 
 model User {
-  id       String @id @default(uuid())
-  email    String @unique
-  password String
+  id         String @id @default(uuid())
+  authMethod String
+  email      String @unique
+  password   String
 
   @@map("users")
 }
