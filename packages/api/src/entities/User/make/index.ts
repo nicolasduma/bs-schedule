@@ -3,14 +3,14 @@ import { makeResult } from '@bs-schedule/utils'
 
 import { Contract, validateUser } from '..'
 
-const make = (user: Contract) => {
+const make = ({ id = uuid(), ...userWithoutId }: Contract) => {
+  const user = { id, ...userWithoutId }
+
   const { error } = validateUser(user)
 
   if (error) return makeResult({ layer: 'entity', message: error.message })
 
-  const id = uuid()
-
-  return makeResult(null, { id, ...user })
+  return makeResult(null, user)
 }
 
 export default make
