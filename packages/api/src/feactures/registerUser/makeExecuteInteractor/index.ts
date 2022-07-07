@@ -10,7 +10,9 @@ import DatasContract from './DatasContract'
 
 const makeExecuteInteractor = (usersRepository: usersRepository.Contract) => {
   const executeInteractor = async (datas: DatasContract) => {
-    const { error, success: user } = userEntity.make(datas)
+    const { user: userFromRequest } = datas
+
+    const { error, success: user } = userEntity.make(userFromRequest)
 
     if (error) {
       return makeResult(error)
