@@ -13,7 +13,9 @@ describe('validate password to make user', () => {
   })
 
   it('should not be able to validate with too many characters', () => {
-    const { error } = validatePassword('123456789123456789123456789')
+    const { error } = validatePassword(
+      '12345678912345678912345678912345678912345678912345678912345678912345678'
+    )
     expect(error.message).toBe(schema.errorMessage.maxLength)
   })
 
