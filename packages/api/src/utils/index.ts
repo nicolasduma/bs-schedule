@@ -1,5 +1,3 @@
-export { default as decodeJWT } from './decodeJWT'
-export { default as generateJWT } from './generateJWT'
 export { default as generatePasswordHash } from './generatePasswordHash'
 export { default as validate } from './validate'
 export { default as validateString } from './validateString'
