@@ -1,6 +1,6 @@
 import { JSONSchemaType } from 'ajv'
 
-import { PasswordType } from '../Contract'
+import { PasswordType } from '../types'
 
 const schema: JSONSchemaType<PasswordType> = {
   type: 'string',

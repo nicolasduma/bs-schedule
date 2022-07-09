@@ -3,8 +3,10 @@ import schema from './schema'
 
 describe('validate password to make user', () => {
   it('should be able validate', () => {
-    const { success } = validatePassword('1234567')
-    expect(success).toBe(true)
+    const { success: password } = validatePassword('1234567', true)
+
+    expect(password).toBeTruthy()
+    expect(typeof password).toBe('string')
   })
 
   it('should not be able to validate with few characters', () => {
