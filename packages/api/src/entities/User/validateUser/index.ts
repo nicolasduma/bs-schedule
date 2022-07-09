@@ -1,21 +1,20 @@
 import { makeResult } from '@bs-schedule/utils'
 
 import {
-  Contract,
+  DatasContract,
   validateAuthMethod,
   validateEmail,
   validatePassword,
 } from '..'
 
-const validateUser = (user: Contract) => {
+const validatedatas = (datas: DatasContract, returnValidatedData?: boolean) => {
   const layer = 'entity'
 
-  if (!user.authMethod)
+  if (!datas.authMethod)
     return makeResult({ layer, message: 'authMethod/not-found' })
 
-  const { error: authMethodValidationError } = validateAuthMethod(
-    user.authMethod
-  )
+  const { error: authMethodValidationError, success: authMethod } =
+    validateAuthMethod(datas.authMethod, true)
 
   if (authMethodValidationError)
     return makeResult({
@@ -23,9 +22,12 @@ const validateUser = (user: Contract) => {
       message: authMethodValidationError.message,
     })
 
-  if (!user.email) return makeResult({ layer, message: 'email/not-found' })
+  if (!datas.email) return makeResult({ layer, message: 'email/not-found' })
 
-  const { error: emailValidationError } = validateEmail(user.email)
+  const { error: emailValidationError, success: email } = validateEmail(
+    datas.email,
+    true
+  )
 
   if (emailValidationError)
     return makeResult({
@@ -33,10 +35,11 @@ const validateUser = (user: Contract) => {
       message: emailValidationError.message,
     })
 
-  if (!user.password)
+  if (!datas.password)
     return makeResult({ layer, message: 'password/not-found' })
 
-  const { error: passwordValidationError } = validatePassword(user.password)
+  const { error: passwordValidationError, success: password } =
+    validatePassword(datas.password, true)
 
   if (passwordValidationError)
     return makeResult({
@@ -44,7 +47,10 @@ const validateUser = (user: Contract) => {
       message: passwordValidationError.message,
     })
 
-  return makeResult(false)
+  return makeResult(
+    false,
+    returnValidatedData ? { authMethod, email, password } : true
+  )
 }
 
-export default validateUser
+export default validatedatas

@@ -1,7 +1,7 @@
 import validateUser from '.'
-import { Contract } from '../'
+import { DatasContract } from '../'
 
-const testUser: Contract = {
+const testUser: DatasContract = {
   authMethod: 'form',
   email: 'contact@email.com',
   password: '123456',
@@ -9,8 +9,10 @@ const testUser: Contract = {
 
 describe('validate user to make it', () => {
   it('should be able validate', () => {
-    const { success } = validateUser(testUser)
-    expect(success).toBe(true)
+    const { success: user } = validateUser(testUser, true)
+
+    expect(user).toBeTruthy()
+    expect(user.email).toBe(testUser.email)
   })
 
   it('should not be able to validate without authMethod', () => {
