@@ -1,14 +1,13 @@
 import prisma from '#/libs/prisma'
 
 import { userEntity } from '#/entities'
-import { EmailType } from '#/entities/User/Contract'
+import { EmailType } from '#/entities/User/types'
 
 import { Contract } from '../'
 
 const adapter: Contract = {
-  save: async (user: userEntity.Contract) => {
-    const filtedDatas: userEntity.Contract = {
-      id: user.id,
+  save: async (user: userEntity.DatasContract) => {
+    const filtedDatas: userEntity.DatasContract = {
       authMethod: user.authMethod,
       email: user.email,
       password: user.password,
@@ -19,7 +18,7 @@ const adapter: Contract = {
 
   findByEmail: async (email: EmailType) => {
     // @ts-ignore
-    const user: userEntity.Contract = await prisma.user.findUnique({
+    const user: userEntity.DatasContract = await prisma.user.findUnique({
       where: {
         email,
       },
