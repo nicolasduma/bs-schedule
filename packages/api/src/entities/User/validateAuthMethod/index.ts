@@ -2,15 +2,27 @@ import { makeResult } from '@bs-schedule/utils'
 
 import { validate, validateString } from '#/utils'
 
-import { AuthMethodType } from '../Contract'
+import { AuthMethodType } from '../types'
 import schema from './schema'
 
-const validateAuthMethod = (authMethod: AuthMethodType) => {
-  const { error } = validateString(authMethod)
+const validateAuthMethod = (
+  authMethod: AuthMethodType,
+  returnValidatedData?: boolean
+) => {
+  const { error: stringValidationError } = validateString(authMethod)
 
-  if (error) return makeResult({ message: `authMethod/${error.message}` })
+  if (stringValidationError)
+    return makeResult({
+      message: `authMethod/${stringValidationError.message}`,
+    })
 
-  return validate(authMethod.replace(/\s/g, ''), schema)
+  const cleanAuthMethod = authMethod.replace(/\s/g, '')
+
+  const { error: validationError } = validate(cleanAuthMethod, schema)
+
+  if (validationError) return makeResult(validationError)
+
+  return makeResult(false, returnValidatedData ? cleanAuthMethod : true)
 }
 
 export default validateAuthMethod

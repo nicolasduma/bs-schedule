@@ -3,9 +3,10 @@ import schema from './schema'
 
 describe('validate authMethod to make user', () => {
   it('should be able validate', () => {
-    const { success } = validateAuthMethod('form')
+    const { success: authMethod } = validateAuthMethod('form', true)
 
-    expect(success).toBe(true)
+    expect(authMethod).toBeTruthy()
+    expect(typeof authMethod).toBe('string')
   })
 
   it('should not be able to validate with a number', () => {

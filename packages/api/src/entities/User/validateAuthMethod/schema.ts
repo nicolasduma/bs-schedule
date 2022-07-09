@@ -1,6 +1,6 @@
 import { JSONSchemaType } from 'ajv'
 
-import { AuthMethodType } from '../Contract'
+import { AuthMethodType } from '../types'
 
 const schema: JSONSchemaType<AuthMethodType> = {
   type: 'string',
