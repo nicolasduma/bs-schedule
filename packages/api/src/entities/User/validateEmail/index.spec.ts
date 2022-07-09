@@ -3,8 +3,10 @@ import schema from './schema'
 
 describe('validate email to make user', () => {
   it('should be able validate', () => {
-    const { success } = validateEmail('contato@email.com')
-    expect(success).toBe(true)
+    const { success: email } = validateEmail('contato@email.com', true)
+
+    expect(email).toBeTruthy()
+    expect(typeof email).toBe('string')
   })
 
   it('should not be able to validate without at sign', () => {

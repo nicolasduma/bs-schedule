@@ -1,6 +1,6 @@
 import { JSONSchemaType } from 'ajv'
 
-import { EmailType } from '../Contract'
+import { EmailType } from '../types'
 
 const schema: JSONSchemaType<EmailType> = {
   type: 'string',

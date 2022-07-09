@@ -2,15 +2,22 @@ import { makeResult } from '@bs-schedule/utils'
 
 import { validate, validateString } from '#/utils'
 
-import { EmailType } from '../Contract'
+import { EmailType } from '../types'
 import schema from './schema'
 
-const validateEmail = (email: EmailType) => {
-  const { error } = validateString(email)
+const validateEmail = (email: EmailType, returnValidatedData?: boolean) => {
+  const { error: stringValidationError } = validateString(email)
 
-  if (error) return makeResult({ message: `email/${error.message}` })
+  if (stringValidationError)
+    return makeResult({ message: `email/${stringValidationError.message}` })
 
-  return validate(email.replace(/\s/g, ''), schema)
+  const cleanEmail = email.replace(/\s/g, '')
+
+  const { error: validationError } = validate(cleanEmail, schema)
+
+  if (validationError) return makeResult(validationError)
+
+  return makeResult(false, returnValidatedData ? cleanEmail : true)
 }
 
 export default validateEmail
