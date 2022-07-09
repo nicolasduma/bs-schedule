@@ -1,7 +1,7 @@
 import { generatePasswordHash } from '#/utils'
 
 import { userEntity } from '#/entities'
-import { EmailType } from '#/entities/User/Contract'
+import { EmailType } from '#/entities/User/types'
 
 import { Contract } from '../'
 
@@ -15,7 +15,7 @@ const { success: user2 } = userEntity.make({
   authMethod: 'form',
   password: '123456',
 })
-const usersArray: userEntity.Contract[] = [
+const usersArray: userEntity.ModelContract[] = [
   {
     ...user1,
     password: generatePasswordHash(user1.password),
