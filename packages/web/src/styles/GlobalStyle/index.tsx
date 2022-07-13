@@ -14,8 +14,7 @@ const CustomStyles = createGlobalStyle({
     antialiased
     -webkit-tap-highlight-color[transparent]
 
-    sm:py-4
-
+    [::-webkit-scrollbar]:(hidden)
     [> div#root]:(h-full)
     
     `,
