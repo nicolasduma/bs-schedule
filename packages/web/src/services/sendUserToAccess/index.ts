@@ -3,13 +3,13 @@ import { makeResult, makeResultFromPromise } from '@bs-schedule/utils'
 import sendUserToRegisterOrVerify from './sendUserToRegisterOrVerify'
 
 interface UserInterface {
-  authMethod: 'google' | 'password'
+  authMethod: 'form' | 'google'
   email: string
-  passwordOrGoogleId: string | null
+  password: string | null
 }
 
 const sendUserToAccessService = async (user: UserInterface) => {
-  const { error, success: token } = await sendUserToRegisterOrVerify(
+  const { error, success: userFromResponse } = await sendUserToRegisterOrVerify(
     'verify',
     user
   )
@@ -23,7 +23,7 @@ const sendUserToAccessService = async (user: UserInterface) => {
     return makeResult(error)
   }
 
-  return makeResult(null, token)
+  return makeResult(null, userFromResponse)
 }
 
 export default sendUserToAccessService

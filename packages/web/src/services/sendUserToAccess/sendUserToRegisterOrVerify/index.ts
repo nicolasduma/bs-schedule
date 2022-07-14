@@ -3,9 +3,9 @@ import { makeResult, makeResultFromPromise } from '@bs-schedule/utils'
 import api from '#/libs/api'
 
 interface UserInterface {
-  authMethod: 'google' | 'password'
+  authMethod: 'form' | 'google'
   email: string
-  passwordOrGoogleId: string | null
+  password: string | null
 }
 
 const sendUserToRegisterOrVerify = async (
@@ -13,7 +13,7 @@ const sendUserToRegisterOrVerify = async (
   user: UserInterface
 ) => {
   const { error: rejected, success: resolved } = await makeResultFromPromise(
-    () => api.post(`/user/${route}`, user)
+    () => api.post(`/user/${route}`, { user })
   )
 
   if (rejected) {
@@ -27,9 +27,9 @@ const sendUserToRegisterOrVerify = async (
     return makeResult({ messege: 'there-was-error' })
   }
 
-  const { success } = resolved.data
+  const { user: userFromResponse } = resolved.data.success
 
-  return makeResult(null, success.token)
+  return makeResult(null, userFromResponse)
 }
 
 export default sendUserToRegisterOrVerify
