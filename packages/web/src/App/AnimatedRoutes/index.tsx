@@ -3,7 +3,7 @@ import { Routes, Route, useLocation } from 'react-router-dom'
 
 import { AnimatePresence } from 'framer-motion'
 
-import { PreloadPage, AccessPage } from '#/pages'
+import { AccessPage, PreloadPage, UserPage } from '#/pages'
 
 const AnimatedRoutes = () => {
   const location = useLocation()
@@ -13,6 +13,7 @@ const AnimatedRoutes = () => {
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<PreloadPage />} />
         <Route path="/acessar" element={<AccessPage />} />
+        <Route path="/usuario/:id" element={<UserPage />} />
       </Routes>
     </AnimatePresence>
   )
