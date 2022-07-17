@@ -1,6 +1,7 @@
 import express from 'express'
 
 import bodyParcer from 'body-parser'
+import cookieParser from 'cookie-parser'
 import cors from 'cors'
 
 import router from './router'
@@ -15,7 +16,9 @@ const corsOptions = {
 }
 
 app.use(cors(corsOptions))
+app.use(cookieParser())
 app.use(bodyParcer.json())
+
 app.use(router)
 
 export default app
