@@ -4,6 +4,7 @@ import { useStateSelector } from '#/hooks'
 
 import { UIComponent } from '#/components'
 
+import ImageSlider from './ImageSlider'
 import * as Styled from './styled'
 
 const HomeScreen = () => {
@@ -11,6 +12,7 @@ const HomeScreen = () => {
 
   return (
     <Styled.Container>
+      <ImageSlider />
 
       <Styled.ServicesContainer>
         <Styled.ServicesText children="Serviços" />
