@@ -2,6 +2,7 @@ import React from 'react'
 
 import { PageComponent } from '#/components'
 
+import Menu from './Menu'
 import * as Styled from './styled'
 
 const UserPage = () => {
@@ -13,7 +14,8 @@ const UserPage = () => {
 
       <PageComponent.Body>
         <Styled.Container>
-          <Styled.ScreensContainer></Styled.ScreensContainer>
+          <Menu />
+
         </Styled.Container>
       </PageComponent.Body>
     </>
