@@ -5,9 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { sendUserToAccessService } from '#/services'
 import { At, Eye, EyeSlash, LockKey } from 'phosphor-react'
 
-import { LOCAL_STORAGE } from '#/constants'
-
-import { changeModalVisibility } from '#/store/actions'
+import { changeCurrentUser, changeModalVisibility } from '#/store/actions'
 
 import { UIComponent } from '#/components'
 
@@ -43,20 +41,20 @@ const Form = (props: PropsInterface) => {
 
         setIsDisabled(true)
 
-        const { error, success: token } = await sendUserToAccessService({
-          authMethod: 'password',
-          email: (emailInputRef.current as HTMLInputElement).value,
-          passwordOrGoogleId: (passwordInputRef.current as HTMLInputElement)
-            .value,
-        })
+        const { error, success: userFromResponse } =
+          await sendUserToAccessService({
+            authMethod: 'form',
+            email: (emailInputRef.current as HTMLInputElement).value,
+            password: (passwordInputRef.current as HTMLInputElement).value,
+          })
 
         if (error) {
           dispatch(changeModalVisibility(true, error.message))
           setIsDisabled(false)
         } else {
-          localStorage.setItem(LOCAL_STORAGE.USER_TOKEN, token)
+          dispatch(changeCurrentUser(userFromResponse))
           setIsDisabled(false)
-          navigate('/')
+          navigate(`/usuario/${userFromResponse.id}`)
         }
       }}
     >

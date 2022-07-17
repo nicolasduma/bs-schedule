@@ -19,7 +19,7 @@ export const RevealPasswordButton = styled(UIComponent.Button.Core)`
   outline-none
   focus:border-amber-400
 
-  [:before]:(content-[''] w-full h-full absolute left-0 top-0)
+  [:before]:(content-[''] w-full h-full relative left-0 top-0)
   
   `}
 `
