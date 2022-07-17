@@ -1,7 +1,6 @@
 interface UserInterface {
   id: string
   email: string
-  token: string
 }
 
 const changeCurrentUser = (user: UserInterface | null = null) => ({
