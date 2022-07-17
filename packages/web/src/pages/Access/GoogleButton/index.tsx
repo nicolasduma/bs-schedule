@@ -9,9 +9,7 @@ import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 
 import firebase from '#/libs/firebase'
 
-import { LOCAL_STORAGE } from '#/constants'
-
-import { changeModalVisibility } from '#/store/actions'
+import { changeCurrentUser, changeModalVisibility } from '#/store/actions'
 
 import * as Styled from './styled'
 
@@ -51,16 +49,17 @@ const GoogleButton = ({ onClick, ...props }: PropsType) => {
 
         if (!credentials) return
 
-        const { error, success: token } = await sendUserToAccessService({
-          authMethod: 'google',
-          email: credentials.user.email,
-          passwordOrGoogleId: credentials.user.uid,
-        })
+        const { error, success: userFromResponse } =
+          await sendUserToAccessService({
+            authMethod: 'google',
+            email: credentials.user.email,
+            password: credentials.user.uid,
+          })
 
         if (error) return dispatch(changeModalVisibility(true, error.message))
 
-        localStorage.setItem(LOCAL_STORAGE.USER_TOKEN, token)
-        navigate('/')
+        dispatch(changeCurrentUser(userFromResponse))
+        navigate(`/usuario/${userFromResponse.id}`)
       }}
     >
       <BsGoogle />
