@@ -2,6 +2,7 @@ import React from 'react'
 
 import { useStateSelector } from '#/hooks'
 import HomeScreen from './Home'
+import ScheduleScreen from './Schedule'
 import * as Styled from './styled'
 
 const Screens = () => {
@@ -9,7 +10,7 @@ const Screens = () => {
 
   return (
     <Styled.ScreenContant>
-      <HomeScreen />
+        {userScreen === 'schedule' ? <ScheduleScreen /> : <HomeScreen />}
     </Styled.ScreenContant>
   )
 }
