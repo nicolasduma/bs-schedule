@@ -1,9 +1,15 @@
-import tw from 'twin.macro'
+import { motion } from 'framer-motion'
+import tw, { styled } from 'twin.macro'
 
-export const Container = tw.div`
+export const Container = styled(motion.div)`
+  ${tw`
+
   w-full
   h-full
   flex flex-col items-center gap-10
+  absolute
+  
+  `}
 `
 
 export const ServicesContainer = tw.div`

@@ -1,8 +1,9 @@
+import { motion } from 'framer-motion'
 import tw, { styled } from 'twin.macro'
 
 import { UIComponent } from '#/components'
 
-export const Schedule = styled(tw.div)`
+export const Schedule = styled(motion.div)`
   ${tw`
 
   w-full

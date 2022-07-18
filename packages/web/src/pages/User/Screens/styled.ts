@@ -1,6 +1,7 @@
 import tw from 'twin.macro'
 
-export const ScreenContant = tw.div`
+export const Screens = tw.div`
   w-[87%] max-w-xl
   h-full
+  relative
 `

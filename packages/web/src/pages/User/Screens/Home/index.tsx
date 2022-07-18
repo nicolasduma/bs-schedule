@@ -1,17 +1,25 @@
 import React from 'react'
 
 import { useStateSelector } from '#/hooks'
+import { makeOpacityTransitionOptions } from '#/styles'
 
 import { UIComponent } from '#/components'
 
 import ImageSlider from './ImageSlider'
 import * as Styled from './styled'
 
+const transitionOptions = makeOpacityTransitionOptions(0.3)
+
 const HomeScreen = () => {
   const { currentUser } = useStateSelector((state) => state)
 
   return (
-    <Styled.Container>
+    <Styled.Container
+      variants={transitionOptions}
+      initial="initial"
+      animate="show"
+      exit="hidden"
+    >
       <ImageSlider />
 
       <Styled.ServicesContainer>
