@@ -1,40 +1,47 @@
-import React, { DetailsHTMLAttributes, useState } from 'react'
+import React, { DetailsHTMLAttributes } from 'react'
+import { useDispatch } from 'react-redux'
 
+import { useStateSelector } from '#/hooks'
 import { Calendar, House, Scissors } from 'phosphor-react'
 import tw from 'twin.macro'
+
+import { changeUserScreen } from '#/store/actions'
 
 import * as Styled from './styled'
 
 type PropsType = DetailsHTMLAttributes<HTMLDivElement>
 
 const Menu = ({ children, ...propsRest }: PropsType) => {
-  const [thatIsSelected, setThatIsSelected] = useState<1 | 2 | 3>(1)
+  const dispatch = useDispatch()
+  const { userScreen } = useStateSelector((state) => state)
 
   return (
     <Styled.Menu {...propsRest}>
-      <Styled.Item css={thatIsSelected === 1 ? tw`text-amber-300` : ''}>
+      <Styled.Item
+        css={!userScreen || userScreen === 'home' ? tw`text-amber-300` : ''}
+      >
         <Styled.ItemIcon children={<House weight="regular" />} />
 
         <Styled.ItemButton
-          onClick={() => setThatIsSelected(1)}
+          onClick={() => dispatch(changeUserScreen('home'))}
           children="Home"
         />
       </Styled.Item>
 
-      <Styled.Item css={thatIsSelected === 2 ? tw`text-amber-300` : ''}>
+      <Styled.Item css={userScreen === 'toSchedule' ? tw`text-amber-300` : ''}>
         <Styled.ItemIcon children={<Scissors weight="regular" />} />
 
         <Styled.ItemButton
-          onClick={() => setThatIsSelected(2)}
+          onClick={() => dispatch(changeUserScreen('toSchedule'))}
           children="Agendar"
         />
       </Styled.Item>
 
-      <Styled.Item css={thatIsSelected === 3 ? tw`text-amber-300` : ''}>
+      <Styled.Item css={userScreen === 'schedule' ? tw`text-amber-300` : ''}>
         <Styled.ItemIcon children={<Calendar weight="regular" />} />
 
         <Styled.ItemButton
-          onClick={() => setThatIsSelected(3)}
+          onClick={() => dispatch(changeUserScreen('schedule'))}
           children="Agenda"
         />
       </Styled.Item>
