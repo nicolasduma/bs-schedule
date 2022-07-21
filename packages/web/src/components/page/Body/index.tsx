@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { makeOpacityTransitionOptions } from '#/styles'
 import { HTMLMotionProps } from 'framer-motion'
 
 import * as Styled from './styled'
@@ -9,34 +10,18 @@ interface PropsInterface extends HTMLMotionProps<'div'> {
   animateToHidden?: boolean
 }
 
+const transitionOptions = makeOpacityTransitionOptions(1)
+
 const Body = (props: PropsInterface) => {
   const { animateToShow = true, animateToHidden = true, ...propsRest } = props
 
   return (
     <Styled.Body
       {...propsRest}
-      initial={animateToShow ? { opacity: 0 } : {}}
-      animate={
-        animateToShow
-          ? {
-              opacity: 1,
-              transition: {
-                duration: 1,
-                delay: 1,
-              },
-            }
-          : {}
-      }
-      exit={
-        animateToHidden
-          ? {
-              opacity: 0,
-              transition: {
-                duration: 1,
-              },
-            }
-          : {}
-      }
+      variants={transitionOptions}
+      initial="initial"
+      animate={animateToShow ? 'show' : ''}
+      exit={animateToHidden ? 'hidden' : ''}
     />
   )
 }
