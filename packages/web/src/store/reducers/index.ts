@@ -6,6 +6,9 @@ const changeCurrentUser = (state = false, action: AnyAction) =>
 const changeModalVisibility = (state = false, action: AnyAction) =>
   action.type === 'CHANGE_MODAL_VISIBILITY' ? action.payload : state
 
+const changeSelectedDate = (state = {}, action: AnyAction) =>
+  action.type === 'CHANGE_SELECTED_DATE' ? action.payload : state
+
 const changeStepToSchedule = (state = false, action: AnyAction) =>
   action.type === 'CHANGE_STEP_TO_SCHEDULE' ? action.payload : state
 
@@ -15,6 +18,7 @@ const changeUserScreen = (state = false, action: AnyAction) =>
 const reducers = {
   currentUser: changeCurrentUser,
   modalVisibility: changeModalVisibility,
+  selectedDate: changeSelectedDate,
   stepToSchedule: changeStepToSchedule,
   userScreen: changeUserScreen,
 }
