@@ -12,3 +12,13 @@ export const months = [
   { initials: 'nov', name: 'novembro' },
   { initials: 'dez', name: 'dezembro' },
 ]
+
+export const daysOfTheWeek = [
+  { initials: 'dom', name: 'domingo' },
+  { initials: 'seg', name: 'segunda-feira' },
+  { initials: 'ter', name: 'terça-feira' },
+  { initials: 'qua', name: 'quarta-feira' },
+  { initials: 'qui', name: 'quinta-feira' },
+  { initials: 'sex', name: 'sexta-feira' },
+  { initials: 'sáb', name: 'sábado' },
+]
