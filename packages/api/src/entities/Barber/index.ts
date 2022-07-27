@@ -1,4 +1,5 @@
 export { default as DatasContract } from './DatasContract'
+export { default as make } from './make'
 export { default as ModelContract } from './ModelContract'
 export { default as validateBarber } from './validateBarber'
 export { default as validateDescription } from './validateDescription'
