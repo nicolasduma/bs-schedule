@@ -1,5 +1,6 @@
 export { default as DatasContract } from './DatasContract'
 export { default as ModelContract } from './ModelContract'
+export { default as validateBarber } from './validateBarber'
 export { default as validateDescription } from './validateDescription'
 export { default as validateName } from './validateName'
 export { default as validatePicture } from './validatePicture'
