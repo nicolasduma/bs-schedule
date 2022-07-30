@@ -7,7 +7,7 @@ import {
   validatePassword,
 } from '..'
 
-const validatedatas = (datas: DatasContract, returnValidatedData?: boolean) => {
+const validateUser = (datas: DatasContract, returnValidatedData?: boolean) => {
   const layer = 'entity'
 
   if (!datas.authMethod)
@@ -53,4 +53,4 @@ const validatedatas = (datas: DatasContract, returnValidatedData?: boolean) => {
   )
 }
 
-export default validatedatas
+export default validateUser
