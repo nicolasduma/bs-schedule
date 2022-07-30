@@ -2,9 +2,9 @@ import { validate as validateUUID } from 'uuid'
 
 import make from '.'
 
-import { Contract } from '..'
+import { DatasContract } from '..'
 
-const testUser: Contract = {
+const testUser: DatasContract = {
   authMethod: 'form',
   email: 'contact@email.com',
   password: '123456',
